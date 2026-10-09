@@ -20,7 +20,7 @@ ads--CDockContainerWidget > QSplitter {
 
 
 ads--CDockSplitter::handle {
-	background-color: palette(light);
+	background-color: transparent;
 	/* uncomment the following line if you would like to change the size of
        the splitter handles */
 	/* height: 1px; */
