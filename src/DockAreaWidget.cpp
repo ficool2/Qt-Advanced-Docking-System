@@ -924,6 +924,11 @@ void CDockAreaWidget::updateTitleBarVisibility()
                 auto DockWidgets = openedDockWidgets();
                 Hidden |= (DockWidgets.size() == 1) && DockWidgets.front()->titleBarActions().empty();
             }
+            if (!Hidden)
+            {
+                auto DockWidgets = openedDockWidgets();
+                Hidden = (DockWidgets.size() == 1) && DockWidgets.front()->features().testFlag(CDockWidget::DockWidgetNoTitleBarWhenAlone);
+            }
         }
 		d->TitleBar->setVisible(!Hidden);
 		if (CDockManager::testConfigFlag(CDockManager::TabsAtBottom))
