@@ -94,6 +94,11 @@ public:
 	~CDockWidgetTab() override;
 
 	/**
+	 * Starts dragging the dock widget as if its tab got torn off after a mouse press
+	 */
+	void startDrag(const QPoint& GlobalPos);
+
+	/**
 	 * Returns true, if this is the active tab
 	 */
 	bool isActiveTab() const;

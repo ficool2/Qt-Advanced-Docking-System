@@ -462,6 +462,18 @@ void CDockWidgetTab::mousePressEvent(QMouseEvent* ev)
 
 
 //============================================================================
+void CDockWidgetTab::startDrag(const QPoint& GlobalPos)
+{
+	auto Features = d->DockWidget->features();
+	if (Features.testFlag(CDockWidget::DockWidgetFloatable) || Features.testFlag(CDockWidget::DockWidgetMovable))
+	{
+		d->saveDragStartMousePosition(GlobalPos);
+		d->startFloating();
+	}
+}
+
+
+//============================================================================
 void CDockWidgetTab::mouseReleaseEvent(QMouseEvent* ev)
 {
 	if (ev->button() == Qt::LeftButton)
