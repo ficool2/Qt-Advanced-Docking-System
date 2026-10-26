@@ -40,6 +40,7 @@
 #include <QElapsedTimer>
 #include <QTime>
 #include <QDrag>
+#include <QWindow>
 #include <QMimeData>
 #include <QDataStream>
 #include <QWindow>
@@ -1013,6 +1014,12 @@ void CFloatingDockContainer::showEvent(QShowEvent *event)
 {
 	Super::showEvent(event);
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+	// The widget has no parent on Wayland
+	// so keep it above the main window via transient parent instead
+	if (internal::isWayland() && windowHandle() && d->DockManager->window()->windowHandle())
+	{
+		windowHandle()->setTransientParent(d->DockManager->window()->windowHandle());
+	}
     if (CDockManager::testConfigFlag(CDockManager::FocusHighlighting))
     {
         this->window()->activateWindow();
